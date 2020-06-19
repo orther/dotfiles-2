@@ -17,10 +17,10 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
       - uses: cachix/cachix-action@v6
         with:
-          name: peel
+          name: orther
           signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'        
       - run: cachix use nix-community
-      - run: cachix use peel
+      - run: cachix use orther
       - run: nix-build
             
   test:
@@ -38,10 +38,10 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
       - uses: cachix/cachix-action@v6
         with:
-          name: peel
+          name: orther
           signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
       - run: cachix use nix-community
-      - run: cachix use peel
+      - run: cachix use orther
       - run: nix-env -f default.nix -i
       - run: dotfiles install
       - run: dotfiles link
@@ -61,10 +61,10 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
       - uses: cachix/cachix-action@v6
         with:
-          name: peel
+          name: orther
           signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
       - run: cachix use nix-community
-      - run: cachix use peel
+      - run: cachix use orther
       - run: nix-build ./overlays/20-emacs/emacs/default.nix
         
   docs:
@@ -77,12 +77,12 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
       - uses: cachix/cachix-action@v6
         with:
-          name: peel
+          name: orther
           signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
       - run: cd docs && nix-shell --pure -p 'emacsWithPackages(ps:[ps.htmlize])' --run 'emacs -Q index.org --batch --eval "(progn (org-babel-tangle)(org-html-export-to-html))" --kill'
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          cname: dotfiles.codearsonist.com
+          cname: nix-dotfiles.orther.dev
           publish_dir: ./docs
