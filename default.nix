@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {}
 , machine ? "fff666"
-, repoUrl ? "https://github.com/orther/nix-dotfiles.git"
-, nurpkgs ? "https://github.com/orther/nur-packages.git"
+, repoUrl ? "git@github.com:orther/nix-dotfiles.git"
+, nurpkgs ? "git@github.com:orther/nur-packages.git"
 , channel ? "nixpkgs-unstable"
 , targetDir ? "$HOME/wrk"
 }:
